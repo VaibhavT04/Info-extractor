@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis</title>
 </head>
 <body>
-    <h1>Resume Screening Results</h1>
-    <p><strong>Name:</strong> {{ info['Name'] }}</p>
-    <p><strong>Email:</strong> {{ info['Email'] }}</p>
-    <p><strong>Phone:</strong> {{ info['Phone'] }}</p>
-    <p><strong>Skills:</strong> {{ skills }}</p>
+    <h2>Resume Analysis Results</h2>
+
+    <h3>Personal Information</h3>
+    <p>{{ info }}</p>
+
+    <h3>Extracted Skills</h3>
+    <p>{{ skills }}</p>
+
+    <h3>Job Description</h3>
+    <p>{{ job_description }}</p>
+
+    <h3>ATS Match Score</h3>
+    <p><strong>{{ match_score }}%</strong></p>
+
+    <h3>Missing Keywords from Resume</h3>
+    <ul>
+        {% for keyword in missing_keywords %}
+        <li>{{ keyword }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Upload Another Resume</a>
 </body>
 </html>

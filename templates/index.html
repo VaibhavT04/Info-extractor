@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Screener</title>
 </head>
 <body>
-    <h1>Upload Resume</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="resume">
-        <button type="submit">Submit</button>
+    <h2>Upload Resume & Enter Job Description</h2>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <label for="resume">Upload Resume (PDF/DOCX):</label>
+        <input type="file" name="resume" required><br><br>
+
+        <label for="job_description">Paste Job Description:</label><br>
+        <textarea name="job_description" rows="6" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Analyze">
     </form>
 </body>
 </html>
