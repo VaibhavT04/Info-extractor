@@ -3,6 +3,7 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from scripts.extract_skills import TECH_SKILLS
 
 # Load NLP model
 nlp = spacy.load("en_core_web_sm")
@@ -20,15 +21,6 @@ EXCLUDE_WORDS = set(stopwords.words("english")).union({
     "extension", "x", "pay", "necessary", "client", "senior", "offer", "management", "common", "dsa", "ds"
 })
 
-# Predefined list of relevant tech skills (extendable)
-TECH_SKILLS = {
-    "python", "java", "c++", "sql", "javascript", "react", "angular", "node.js", "flask", "django",
-    "machine learning", "deep learning", "nlp", "tensorflow", "pytorch", "opencv", "aws", "azure",
-    "gcp", "docker", "kubernetes", "linux", "bash", "git", "rest api", "graphql", "mongodb",
-    "mysql", "postgresql", "data structures", "algorithms", "llm", "fine-tuning", "transformers",
-    "bert", "lstm", "cnn", "rnn", "cloud computing", "big data", "hadoop", "spark", "kafka"
-}
-
 def preprocess_text(text):
     """Lemmatizes and removes stopwords from text."""
     doc = nlp(text.lower())
@@ -36,6 +28,9 @@ def preprocess_text(text):
 
 def match_resume_to_job(resume_text, job_description):
     """Computes ATS match score and identifies missing relevant skills."""
+    if not resume_text or not job_description:
+        return 0, []
+
     processed_resume = preprocess_text(resume_text)
     processed_job_desc = preprocess_text(job_description)
 
